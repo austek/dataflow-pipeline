@@ -1,0 +1,10 @@
+*
+!.gitignore
+!dataSources.xml
+!codeStyleSettings.xml
+!codeStyles
+!codeStyles/*
+!runConfigurations
+!runConfigurations/*
+# Project exclude paths
+/.
