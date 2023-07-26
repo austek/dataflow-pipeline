@@ -22,12 +22,11 @@ function SensorOrchestrator() {
         if (lastIngestMsg !== null) {
             let message = JSON.parse(Buffer.from(lastIngestMsg.payload, 'base64').toString('utf8'));
             setSensorData(prevState => {
-                console.log("S", message);
                 if (!prevState[message.name]) {
                     prevState[message.name] = {values: [], times: []};
                 }
                 prevState[message.name].values.push(message.value);
-                prevState[message.name].times.push(reviveDate(message.time));
+                prevState[message.name].times.push(new Date(message.time));
                 return {...prevState};
             })
             sendIngestMsg({"messageId": lastIngestMsg.messageId});

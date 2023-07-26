@@ -10,3 +10,6 @@ spring:
 #          topic-name: sensors_ingest
 #          schema-info:
 #            schema-type: JSON
+
+logging.level:
+  org.apache.pulsar: info

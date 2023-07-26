@@ -33,8 +33,8 @@ public class SensorController {
                         .doOnNext(sensorEvent -> logger.info("About to send sensors entry {}", sensorEvent))
                         .map(sensorEvent ->
                                 MessageSpec.builder(sensorEvent).key(sensorEvent.name()).build()
-                        )
-//                Schema.JSON(SensorEvent.class)
+                        ),
+                Schema.JSON(SensorEvent.class)
         ).then();
     }
 
