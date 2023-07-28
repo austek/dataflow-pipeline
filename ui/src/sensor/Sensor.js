@@ -22,16 +22,18 @@ export default function Sensor(props) {
         props.median,
         props.mean]);
 
-    const timeFormatter = (date: Date) => date.getHours().toString() + ":" + date.getMinutes().toString();
+    const timeFormatter = (date) => date.getHours().toString() + ":" + date.getMinutes().toString();
 
 
     return (
         <div id="chart">
-            <span>{props.name}:</span>
+            <h2>{props.name}</h2>
+            <span>Mean: {state.mean}°C</span><br/>
+            <span>Median: {state.median}°C</span>
             <LineChart
                 xAxis={[{scaleType: 'time', data: state.times, valueFormatter: timeFormatter}]}
-                series={[{data: state.values}]}
-                width={500}
+                series={[{data: state.values, label: '°C', area: false}]}
+                width={1500}
                 height={300}
             />
         </div>

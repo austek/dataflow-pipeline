@@ -1,29 +1,23 @@
 plugins {
     java
-//    id("com.github.johnrengelman.shadow") version "8.1.1"
     id("org.springframework.boot") version "3.1.1"
     id("io.spring.dependency-management") version "1.1.0"
 }
 
 repositories {
     mavenCentral()
+    maven(url = "https://repo.spring.io/milestone")
+    maven(url = "https://repo.spring.io/snapshot")
 }
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-log4j2")
-    implementation("org.springframework.pulsar:spring-pulsar-reactive-spring-boot-starter:0.2.0")
-//    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
-//    implementation("com.fasterxml.jackson.module:jackson-module-jsonSchema")
+    implementation("org.springframework.pulsar:spring-pulsar-reactive-spring-boot-starter:0.2.1-SNAPSHOT")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
 }
-
-//tasks.shadowJar {
-//    relocate("com.fasterxml.jackson","org.apache.pulsar.shade.com.fasterxml.jackson")
-//    mergeServiceFiles()
-//}
 
 configurations {
     all {

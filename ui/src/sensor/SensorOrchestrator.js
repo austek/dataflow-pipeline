@@ -36,7 +36,6 @@ function SensorOrchestrator() {
     useEffect(() => {
         if (lastMedianMsg !== null) {
             let message = JSON.parse(Buffer.from(lastMedianMsg.payload, 'base64').toString('utf8'));
-            console.log("M", message);
             setMedianData(prevState => {
                 prevState[message.name] = message;
                 return {...prevState};
@@ -48,7 +47,6 @@ function SensorOrchestrator() {
     useEffect(() => {
         if (lastMeanMsg !== null) {
             let message = JSON.parse(Buffer.from(lastMeanMsg.payload, 'base64').toString('utf8'));
-            console.log("MM", message);
             setMeanData(prevState => {
                 prevState[message.name] = message;
                 return {...prevState};
@@ -57,12 +55,6 @@ function SensorOrchestrator() {
         }
     }, [lastMeanMsg, sengMeanMsg]);
 
-    function reviveDate(value) {
-        const isoDateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
-        return typeof value === 'string' && isoDateRegex.test(value)
-            ? new Date(value)
-            : value
-    }
 
     return (
         <div id="charts">
