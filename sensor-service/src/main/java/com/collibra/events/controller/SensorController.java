@@ -27,15 +27,17 @@ public class SensorController {
 
     @PostMapping("/sensors")
     Mono<Void> ingest(@RequestBody Flux<SensorEvent> sensorEventFlux) {
-        return pulsarTemplate.send(
-                SENSOR_INGEST_TOPIC_NAME,
-                sensorEventFlux
-                        .doOnNext(sensorEvent -> logger.info("About to send sensors entry {}", sensorEvent))
-                        .map(sensorEvent ->
-                                MessageSpec.builder(sensorEvent).key(sensorEvent.name()).build()
-                        ),
-                Schema.JSON(SensorEvent.class)
-        ).then();
+        return pulsarTemplate
+                .send(
+                        SENSOR_INGEST_TOPIC_NAME,
+                        sensorEventFlux
+                                .doOnNext(sensorEvent -> logger.info("About to send sensors entry {}", sensorEvent))
+                                .map(sensorEvent -> MessageSpec.builder(sensorEvent)
+                                        .key(sensorEvent.name())
+                                        .build()),
+                        Schema.JSON(SensorEvent.class))
+                .doOnError((ex) -> System.out.println("ERROR: " + ex))
+                .doOnNext((sendResult) -> System.out.println("RESULT: " + sendResult.getException()))
+                .then();
     }
-
 }

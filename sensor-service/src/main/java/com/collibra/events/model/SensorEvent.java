@@ -1,7 +1,7 @@
 package com.collibra.events.model;
 
-import org.apache.pulsar.shade.com.fasterxml.jackson.annotation.JsonCreator;
-import org.apache.pulsar.shade.com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.Instant;
 
